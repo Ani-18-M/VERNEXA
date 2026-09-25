@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="vernexa">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>vernexa</title>
+  <link rel="manifest" href="manifest.json">
+  <script>
+    window.__vernexaSpeech = {
+      recognition: null,
+      isRecording: false,
+      start: function(lang, onResult, onError, onEnd) {
+        var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          if (onError) onError('Speech recognition is not supported in this browser. Please use Google Chrome or Microsoft Edge.');
+          if (onEnd) onEnd();
+          return;
+        }
+        if (this.recognition) {
+          try { this.recognition.abort(); } catch(e) {}
+          this.recognition = null;
+        }
+
+        try {
+          var rec = new SpeechRec();
+          this.recognition = rec;
+          this.isRecording = true;
+          rec.continuous = true;
+          rec.interimResults = true;
+          rec.lang = lang || 'en-IN';
+
+          rec.onresult = function(event) {
+            var full = '';
+            for (var i = 0; i < event.results.length; i++) {
+              var seg = event.results[i];
+              if (seg && seg.length > 0) {
+                full += seg[0].transcript;
+              }
+            }
+            var clean = full.trim();
+            console.log('[Vernexa] Speech transcript:', clean);
+            if (clean.length > 0 && onResult) {
+              onResult(clean);
+            }
+          };
+
+          rec.onerror = function(event) {
+            var err = event.error || '';
+            console.warn('[Vernexa] Speech error:', err);
+            if (err === 'no-speech' || err === 'aborted') {
+              return;
+            }
+            if (err === 'not-allowed') {
+              if (onError) onError('Microphone access was denied. Click the site settings icon in the browser address bar to Allow microphone.');
+            } else {
+              if (onError) onError('Speech notice: ' + err);
+            }
+            if (onEnd) onEnd();
+          };
+
+          rec.onend = function() {
+            console.log('[Vernexa] Speech recognition session ended');
+            if (onEnd) onEnd();
+          };
+
+          rec.start();
+          console.log('[Vernexa] Speech recognition started in language:', rec.lang);
+        } catch(e) {
+          console.error('[Vernexa] Could not start speech recognition:', e);
+          if (onError) onError('Microphone error: ' + e);
+          if (onEnd) onEnd();
+        }
+      },
+      stop: function() {
+        this.isRecording = false;
+        if (this.recognition) {
+          try { this.recognition.stop(); } catch(e) {}
+          this.recognition = null;
+        }
+        console.log('[Vernexa] Speech recognition stopped');
+      }
+    };
+  </script>
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

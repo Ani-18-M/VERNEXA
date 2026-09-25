@@ -1,0 +1,10 @@
+{
+  "name": "vernexa-mobile-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VERNEXA - Flutter Web & Mobile App",
+  "scripts": {
+    "build": "bash build.sh",
+    "vercel-build": "bash build.sh"
+  }
+}

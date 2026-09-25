@@ -1,0 +1,10 @@
+{
+  "name": "vernexa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VERNEXA - Offline-First AI Classroom Assistant for Multilingual Education",
+  "scripts": {
+    "build": "bash build.sh",
+    "vercel-build": "bash build.sh"
+  }
+}
