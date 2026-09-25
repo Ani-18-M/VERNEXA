@@ -395,6 +395,8 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> with SingleTick
                             backgroundColor: primaryPurple,
                             foregroundColor: Colors.white,
                             elevation: 0,
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                            alignment: Alignment.center,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
                             ),
@@ -407,9 +409,11 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> with SingleTick
                                 )
                               : Text(
                                   _tabController.index == 0 && !_otpSent ? 'Send OTP' : 'Verify & Continue',
+                                  textAlign: TextAlign.center,
                                   style: GoogleFonts.plusJakartaSans(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
+                                    color: Colors.white,
                                   ),
                                 ),
                         ),

@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                 : (screenHeight * 0.29).clamp(150.0, 220.0);
             final double textSpacing = (screenHeight * 0.012).clamp(6.0, 14.0);
             final double missionFontSize = isDesktop ? 18.0 : (isTablet ? 16.0 : 14.0);
-            final double buttonHeight = (screenHeight * 0.052).clamp(44.0, 50.0);
+            final double buttonHeight = isDesktop ? 48.0 : 50.0;
 
             // Responsive footer height: on desktop, use the full aspect ratio (1376x608) so 100% of the landscape is visible
             final double footerHeight = isDesktop
@@ -182,12 +182,15 @@ class LoginScreen extends StatelessWidget {
                                           backgroundColor: const Color(0xFF5C27D8),
                                           foregroundColor: Colors.white,
                                           elevation: 1,
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                          alignment: Alignment.center,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(14),
                                           ),
                                         ),
                                         child: Text(
                                           'Teacher Login',
+                                          textAlign: TextAlign.center,
                                           style: GoogleFonts.plusJakartaSans(
                                             fontSize: 14.5,
                                             fontWeight: FontWeight.w700,
@@ -204,6 +207,10 @@ class LoginScreen extends StatelessWidget {
                                         onPressed: () => _navigateToClassroomSetup(context),
                                         style: OutlinedButton.styleFrom(
                                           backgroundColor: Colors.white,
+                                          foregroundColor: const Color(0xFF4B2D8C),
+                                          elevation: 0,
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                          alignment: Alignment.center,
                                           side: const BorderSide(
                                             color: Color(0xFF9086B8),
                                             width: 1.5,
@@ -214,6 +221,7 @@ class LoginScreen extends StatelessWidget {
                                         ),
                                         child: Text(
                                           'Continue as Teacher',
+                                          textAlign: TextAlign.center,
                                           style: GoogleFonts.plusJakartaSans(
                                             fontSize: 14.5,
                                             fontWeight: FontWeight.w700,
@@ -236,21 +244,24 @@ class LoginScreen extends StatelessWidget {
                                           backgroundColor: const Color(0xFF5C27D8),
                                           foregroundColor: Colors.white,
                                           elevation: 0,
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                          alignment: Alignment.center,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(14),
                                           ),
                                         ),
                                         child: Text(
                                           'Teacher Login',
+                                          textAlign: TextAlign.center,
                                           style: GoogleFonts.plusJakartaSans(
-                                            fontSize: 14.5,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.white,
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 8),
+                                    const SizedBox(height: 10),
                                     SizedBox(
                                       width: double.infinity,
                                       height: buttonHeight,
@@ -258,6 +269,10 @@ class LoginScreen extends StatelessWidget {
                                         onPressed: () => _navigateToClassroomSetup(context),
                                         style: OutlinedButton.styleFrom(
                                           backgroundColor: Colors.white,
+                                          foregroundColor: const Color(0xFF4B2D8C),
+                                          elevation: 0,
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                          alignment: Alignment.center,
                                           side: const BorderSide(
                                             color: Color(0xFF9086B8),
                                             width: 1.5,
@@ -268,8 +283,9 @@ class LoginScreen extends StatelessWidget {
                                         ),
                                         child: Text(
                                           'Continue as Teacher',
+                                          textAlign: TextAlign.center,
                                           style: GoogleFonts.plusJakartaSans(
-                                            fontSize: 14.5,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w700,
                                             color: const Color(0xFF4B2D8C),
                                           ),
